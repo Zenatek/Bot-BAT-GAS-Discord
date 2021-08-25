@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 import time
-import sys
+import os
 
 
 price_url = 'https://api.coingecko.com/api/v3/simple/price?ids=basic-attention-token&vs_currencies=USD'
@@ -37,8 +37,7 @@ async def config(ctx, arg):
     channel_name_updated = "USD | Gwei"
     await guild.create_voice_channel(name=channel_name_updated, category=cat)
     ch_id_list.append(discord.utils.get(ctx.guild.channels, name=channel_name_updated))
-    print(ch_id_list)
-    # helper = "Voice channel acquired: " + str(discord.utils.get(ctx.guild.channels, name=arg)) + ". Type $start track to start tracking"
+    # print(ch_id_list)
     helper = "Go to voice channel settings and set connect to False.\n\n" "Type: $start track"
     await ctx.send(helper)
 
@@ -52,8 +51,8 @@ async def start(ctx, arg):
         bat_price = bat_current_price(price_url)
         gas_value = gas_current_value(gas_url)
         channel_name_updated = str(bat_price) + " USD " + " | " + str(gas_value) + " Gwei"
-        #await ctx.send(channel_name_updated)
-        #print(ch_id_list[0].id)
+        # await ctx.send(channel_name_updated)
+        # print(ch_id_list[0].id)
         print(channel_name_updated)
         ch = discord.utils.get(ctx.guild.channels, id=ch_id_list[0].id)
         await ch.edit(name = channel_name_updated)
@@ -62,4 +61,4 @@ async def start(ctx, arg):
 
 if __name__ == '__main__':
     print("Running")
-    bot.run(sys.argv[1])
+    bot.run(os.environ.get('TOKEN'))
