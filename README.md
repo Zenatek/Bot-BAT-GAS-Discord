@@ -3,4 +3,13 @@ A bot based on 'discord.py' for Discord to keep track of Basic attension token p
 <p align="center">
   <img src="bot.jpg" />
 </p>
+To configure a voice channel to keep track digit to private message with the bot
 
+```
+$config channel
+```
+and then to start tracking
+
+```
+$start tracker
+```
