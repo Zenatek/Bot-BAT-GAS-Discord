@@ -10,7 +10,7 @@ import os
 price_url = 'https://api.coingecko.com/api/v3/simple/price?ids=basic-attention-token&vs_currencies=USD'
 #gas_url = 'https://www.etherchain.org/api/gasPriceOracle'
 gas_url = 'https://ethgasstation.info/api/ethgasAPI.json?api-key=' + os.environ.get('APIKEY')
-h24_url = 'https://api.coingecko.com/api/v3/coins/basic-attention-token?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false'
+h24_url = 'https://api.coingecko.com/api/v3/coins/basic-attention-token?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=$
 
 def bat_current_price(url):
     r = requests.get(url)
@@ -21,7 +21,7 @@ def gas_current_value(url):
     r = requests.get(url)
     if r.status_code == 200:
         data = r.json()
-        return int(data['average']//10)
+        return (int(data['average'])//10)
     else:
         print("Error")
 
@@ -64,7 +64,7 @@ async def start(ctx, arg):
         try:
            bat_price = bat_current_price(price_url)
            gas_value = gas_current_value(gas_url)
-           #gas_value = 0 
+           #gas_value = 0
            h24_perc_value = h24_value(h24_url)
 
            # UPDATE PRICE AND GAS
