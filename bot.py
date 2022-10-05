@@ -21,7 +21,7 @@ def gas_current_value(url):
     r = requests.get(url)
     if r.status_code == 200:
         data = r.json()
-        return (int(data['average'])//10)
+        return int(data['average']//10)
     else:
         print("Error")
 
