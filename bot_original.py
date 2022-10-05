@@ -61,31 +61,28 @@ async def start(ctx, arg):
     list_voice_ch = cat.channels
     starttime = time.time()
     while True:
-        try:
-           bat_price = bat_current_price(price_url)
-           gas_value = gas_current_value(gas_url)
-           #gas_value = 0 
-           h24_perc_value = h24_value(h24_url)
+        bat_price = bat_current_price(price_url)
+        gas_value = gas_current_value(gas_url)
+        #gas_value = 0 
+        h24_perc_value = h24_value(h24_url)
 
-           # UPDATE PRICE AND GAS
-           channel_name_updated = str(bat_price) + " USD " + " | " + str(gas_value) + " Gwei"
-           # await ctx.send(channel_name_updated)
-           print(channel_name_updated)
-           ch = discord.utils.get(ctx.guild.channels, id=list_voice_ch[0].id)
-           await ch.edit(name = channel_name_updated)
+        # UPDATE PRICE AND GAS
+        channel_name_updated = str(bat_price) + " USD " + " | " + str(gas_value) + " Gwei"
+        # await ctx.send(channel_name_updated)
+        print(channel_name_updated)
+        ch = discord.utils.get(ctx.guild.channels, id=list_voice_ch[0].id)
+        await ch.edit(name = channel_name_updated)
 
-           # UPDATE 24h PERCENT
-           if h24_perc_value >= 0:
-               channel_name_updated = ('24h: ↗️  ' + str(h24_perc_value) + '%')
-           else:
-               channel_name_updated = ('24h: ↘️  ' + str(h24_perc_value) + '%')
-           print(channel_name_updated)
-           ch = discord.utils.get(ctx.guild.channels, id=list_voice_ch[1].id)
-           await ch.edit(name = channel_name_updated)
+        # UPDATE 24h PERCENT
+        if h24_perc_value >= 0:
+            channel_name_updated = ('24h: ↗️  ' + str(h24_perc_value) + '%')
+        else:
+            channel_name_updated = ('24h: ↘️  ' + str(h24_perc_value) + '%')
+        print(channel_name_updated)
+        ch = discord.utils.get(ctx.guild.channels, id=list_voice_ch[1].id)
+        await ch.edit(name = channel_name_updated)
 
-           time.sleep(3600)
-        except:
-           pass
+        time.sleep(360.0 - ((time.time() - starttime) % 360.0))
 
 
 if __name__ == '__main__':
